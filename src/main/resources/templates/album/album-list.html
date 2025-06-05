@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(アルバム一覧)}"></head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+    <div class="w-50 mx-auto mt-4">
+        <div th:if="${error}" th:text="${error}" class="alert alert-danger" >sample message</div>
+    </div>
+    <h3 class="text-center">アルバム一覧</h3>
+    <table class="table table-striped table-bordered w-75 mx-auto">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>アーティスト</th>
+                <th>リリース日</th>
+                <th>曲数</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="album : ${albums}">
+                <td><span th:text="${album.albumId}">album id</span></td>
+                <td><a th:href="@{/albums/{albumId}(albumId=${album.albumId})}" class="text-decoration-none"><span th:text="${album.title}">album title</span></a></td>
+                <td><span th:text="${album.artist}">album artist</span></td>
+                <td><span th:text="${album.releaseDate}">album releaseDate</span></td>
+                <td><span th:text="${album.musicCount}">album musicCount</span></td>
+                <td>
+                    <div class="d-flex">
+                        <form th:action="@{/albums/{albumId}/edit(albumId=${album.albumId})}" method="get">
+                            <button type="submit" class="btn btn-warning btn-sm mx-2">✏️</button>
+                        </form>
+                        <form th:action="@{/albums/{albumId}/delete(albumId=${album.albumId})}" method="post" class="delete-form">
+                            <button type="submit" class="btn btn-danger btn-sm mx-2">🗑️</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<div th:replace="~{layout :: footer}"></div>
+<script src="/js/delete-form.js"></script>
+</body>
+</html>
