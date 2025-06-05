@@ -9,7 +9,6 @@ INSERT INTO musics (title, duration, album_id) VALUES
     ('Moonlight', '00:04:12', 1),
     ('Eternal Memories', '00:05:45', 2);
 
--- PW は「track」
 INSERT INTO users (username, password) VALUES ('sample', '$2a$08$hBocxV325GV9RKzHR.lHreJr8DsMrkg6vg0kRTbNnBvUFknu670GC');
 
 insert into favorites (user_id, music_id) values(1, 1);
